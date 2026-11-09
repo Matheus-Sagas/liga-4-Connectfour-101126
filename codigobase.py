@@ -18,3 +18,22 @@ nomes={jogador1:"Jogador 1(Vermelho)",
        }
 cortexto={jogador1:"#ffffff",
            jogador2:"#000000"}
+#jogo
+def criar_tabuleiro():
+    return [[vazio for _ in range(colunas)] for _ in range(linhas)]
+def coluna_cheia(tabuleiro, coluna):
+    return all(tabuleiro[linha][coluna] != vazio for linha in range(linhas))
+def inserir_ficha(tabuleiro, coluna, jogador):
+    if not 0<=coluna<COLUNAS or coluna_cheia(tabuleiro, coluna):
+        return None
+    for linha in range(linhas-1, -1, -1):
+        if tabuleiro[linha][coluna] == vazio:
+            tabuleiro[linha][coluna] = jogador
+            return linha
+    return None
+def verificar_vitoria(tabuleiro, jogador):
+    direcoes=[(0,1),(1,0),(1,1),(1,-1)]
+    for linha in range(linhas):
+        for coluna in range(colunas):
+            for d_linha,d_coluna in direcoes:
+                (linha+i*d_linha, coluna+i*d_coluna) for i in range(4)
