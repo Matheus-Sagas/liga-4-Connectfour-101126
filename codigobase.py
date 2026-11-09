@@ -36,4 +36,20 @@ def verificar_vitoria(tabuleiro, jogador):
     for linha in range(linhas):
         for coluna in range(colunas):
             for d_linha,d_coluna in direcoes:
-                (linha+i*d_linha, coluna+i*d_coluna) for i in range(4)
+                celulas=[(linha + i*d_linha, coluna + i*d_coluna) for i in range(4)]
+                if all(0<=l<linhas and 0<=c<colunas and tabuleiro[l][c]==jogador for l,c in celulas):
+                    return celulas 
+    return None
+#interface grafica
+def desenhar_tabuleiro(canvas, tabuleiro, destaque=None):
+    canvas.delete("all")
+    for linha in range(linhas):
+        for coluna in range(colunas):
+            x0=coluna*tamanho_celula+margem+6
+            y0=linha*tamanho_celula+margem+6
+            x1=x0+tamanho_celula-margem-12
+            y1=y0+tamanho_celula-margem-12
+            vencedora=(linha,coluna) in destaque
+            canvas.create_oval(
+                x0,y0,x1,y1,fill=cores[tabuleiro[linha][coluna]],outline=cordestaque if vencedora else "#123a91",
+                width=5 if vencedora else 2)
