@@ -53,3 +53,19 @@ def desenhar_tabuleiro(canvas, tabuleiro, destaque=None):
             canvas.create_oval(
                 x0,y0,x1,y1,fill=cores[tabuleiro[linha][coluna]],outline=cordestaque if vencedora else "#123a91",
                 width=5 if vencedora else 2)
+def main():
+    root=tk.Tk()
+    root.title("Connect Four/Conecta 4")
+    root.resizable(False,False)
+    estado={"tabuleiro":criar_tabuleiro(),"jogador":jogador1,"fim":False}
+    label_turno=tk.Label(root,font=("Helvetica",16, "bold"),pady=8,width=30)
+    label_turno.pack(fill="X")
+    label_aviso=tk.Label(root, text="",fg="#b71c1c",font=("Helvetica",11))
+    label_aviso.pack()
+    frame_botoes=tk.Frame(root)
+    frame_botoes.pack(fill="x",padx=margem)
+    largura=COLUNAS*tamanho_celula+margem*2
+    altura=LINHAS*tamanho_celula+margem*2
+    canvas=tk.Canvas(root,width=largura,height=altura,bg=cortabuleir,highlightthickness=0)
+    canvas.pack()
+    
